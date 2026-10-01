@@ -89,8 +89,8 @@ class FishCardTile extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 56,
-                height: 56,
+                width: 88,
+                height: 40,
                 decoration: BoxDecoration(
                   color: AppTheme.waterBlue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
