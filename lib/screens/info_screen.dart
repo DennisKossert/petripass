@@ -209,6 +209,8 @@ class InfoScreen extends StatelessWidget {
           const SizedBox(height: 24),
           _SourcesCard(),
           const SizedBox(height: 12),
+          _ImageCreditsCard(),
+          const SizedBox(height: 12),
           _AboutCard(),
           const SizedBox(height: 8),
         ],
@@ -465,6 +467,60 @@ class _InfoSection extends StatelessWidget {
                 Text(content, style: const TextStyle(fontSize: 14, height: 1.6)),
           ),
         ],
+      ),
+    );
+  }
+}
+
+
+class _ImageCreditsCard extends StatelessWidget {
+  Future<void> _launch(String url) async {
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final small = TextStyle(fontSize: 12, color: cs.onSurfaceVariant);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Icon(Icons.image_outlined, color: cs.primary, size: 20),
+              const SizedBox(width: 8),
+              Text('Bildnachweis',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: cs.primary)),
+            ]),
+            const SizedBox(height: 8),
+            Text(
+              'Die Fischbilder stammen überwiegend aus Marcus Elieser Bloch, '
+              '„Oeconomische Naturgeschichte der Fische Deutschlands“ (1782–1785), '
+              'sowie von Sherman F. Denton (1896), Jonathan Couch (19. Jh.) und weiteren '
+              'historischen Werken. Diese Bilder sind gemeinfrei. Quelle: Wikimedia Commons.',
+              style: small,
+            ),
+            const SizedBox(height: 8),
+            Text('Fotos unter CC BY-SA 3.0:', style: small.copyWith(fontWeight: FontWeight.w600)),
+            _SourceLink(
+              label: 'Moderlieschen – Foto: Viridiflavus',
+              url: 'https://commons.wikimedia.org/wiki/File:LeucaspiusDelineatusMale.JPG',
+              onTap: _launch,
+            ),
+            _SourceLink(
+              label: 'Kessler-Grundel – Foto: Piet Spaans',
+              url: 'https://commons.wikimedia.org/wiki/File:NeogobiusKessleriSide_7-9-2009_10-13-45_AM_2.jpg',
+              onTap: _launch,
+            ),
+            _SourceLink(
+              label: 'Lizenz CC BY-SA 3.0',
+              url: 'https://creativecommons.org/licenses/by-sa/3.0/deed.de',
+              onTap: _launch,
+            ),
+          ],
+        ),
       ),
     );
   }
