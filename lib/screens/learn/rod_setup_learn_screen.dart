@@ -132,7 +132,7 @@ class RodSetupDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('${setup.id}: ${setup.targetFish}')),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.fromLTRB(16, 16, 16, 16 + MediaQuery.of(context).padding.bottom),
         children: [
           // Header
           Card(
