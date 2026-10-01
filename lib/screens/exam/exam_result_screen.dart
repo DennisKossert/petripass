@@ -4,6 +4,7 @@ import '../../models/fish.dart';
 import '../../models/rod_setup.dart';
 import '../../theme/app_theme.dart';
 import '../home_screen.dart';
+import '../../services/review_prompt.dart';
 
 class ExamResultScreen extends StatelessWidget {
   final List<Question> questions;
@@ -47,6 +48,9 @@ class ExamResultScreen extends StatelessWidget {
     final fishPass = fishCorrect >= 4;
     final rodPass = rodPoints >= 25;
     final passed = writtenPass && fishPass && rodPass;
+    if (passed) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => ReviewPrompt.maybeAsk());
+    }
 
     return Scaffold(
       appBar: AppBar(
