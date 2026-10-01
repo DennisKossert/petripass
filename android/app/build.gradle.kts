@@ -15,7 +15,7 @@ if (keyPropertiesFile.exists()) {
 
 android {
     namespace = "de.fischereiapp.fisch_pruefung_nrw"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -30,7 +30,7 @@ android {
     defaultConfig {
         applicationId = "de.fischereiapp.fisch_pruefung_nrw"
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 36  // Google Play: Ziel-API 36 ab 31.08.2026
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
