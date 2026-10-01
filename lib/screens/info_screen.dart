@@ -250,7 +250,7 @@ class _SourcesCard extends StatelessWidget {
             const SizedBox(height: 12),
             _SourceLink(
               label: 'Verordnung über die Fischerprüfung NRW (Fischerprüfungsordnung) mit Prüfungsfragen (Anlage 1) – recht.nrw.de',
-              url: 'https://recht.nrw.de/lrgv/rechtsverordnung/01012015-verordnung-ueber-die-fischerpruefung-fischerpruefungsordnung/',
+              url: 'https://recht.nrw.de/lrgv/rechtsverordnung/03072026-verordnung-ueber-die-fischerpruefung',
               onTap: _launch,
             ),
             _SourceLink(
