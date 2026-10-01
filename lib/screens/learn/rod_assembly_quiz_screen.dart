@@ -79,7 +79,7 @@ class _RodAssemblyQuizScreenState extends State<RodAssemblyQuizScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: Text('Aufgabe ${_setup.id} abgeschlossen'),
         content: SingleChildScrollView(
           child: Column(
@@ -92,8 +92,8 @@ class _RodAssemblyQuizScreenState extends State<RodAssemblyQuizScreen> {
                     fontWeight: FontWeight.bold,
                     color: AppTheme.sandBrown),
               ),
-              const Text('Komponenten richtig',
-                  style: TextStyle(color: Colors.grey)),
+              Text('Komponenten richtig',
+                  style: TextStyle(color: Theme.of(dialogContext).colorScheme.onSurfaceVariant)),
               const SizedBox(height: 14),
               ..._items.asMap().entries.map((e) {
                 final ok = e.key < _results.length && _results[e.key];
@@ -109,8 +109,8 @@ class _RodAssemblyQuizScreenState extends State<RodAssemblyQuizScreen> {
                       Expanded(
                         child: RichText(
                           text: TextSpan(
-                            style: const TextStyle(
-                                fontSize: 12, color: Colors.black87),
+                            style: TextStyle(
+                                fontSize: 12, color: Theme.of(dialogContext).colorScheme.onSurface),
                             children: [
                               TextSpan(
                                   text: '${e.value.component}: ',
@@ -217,9 +217,9 @@ class _RodAssemblyQuizScreenState extends State<RodAssemblyQuizScreen> {
                                       ),
                                       Text(
                                         'für ${_setup.targetFish}',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                             fontSize: 14,
-                                            color: Colors.black87),
+                                            color: Theme.of(context).colorScheme.onSurfaceVariant),
                                       ),
                                     ],
                                   ),
@@ -297,8 +297,8 @@ class _RodAssemblyQuizScreenState extends State<RodAssemblyQuizScreen> {
                                               fontWeight: FontWeight.bold)),
                                       Text(
                                         'Welche ${item.component} für diese Aufgabe?',
-                                        style: const TextStyle(
-                                            color: Colors.grey,
+                                        style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                                             fontSize: 13),
                                       ),
                                     ],

@@ -67,6 +67,9 @@ const Map<String, List<String>> _synonyms = {
 
   // Äsche: wird durch Normalisierung (ae) abgedeckt, trotzdem explicit
   'aesche': ['aesche'],
+
+  // Lachs: vollständiger Name wird auch akzeptiert
+  'lachs': ['atlantischer lachs', 'atlantiklachs'],
 };
 
 /// Normalisierung: Umlaute → ASCII, Bindestriche/Klammern als Leerzeichen,

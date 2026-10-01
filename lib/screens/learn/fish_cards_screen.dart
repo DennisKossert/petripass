@@ -152,6 +152,7 @@ class FishDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(fish.germanName)),
       body: ListView(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         children: [
           // Fish image placeholder
           Container(

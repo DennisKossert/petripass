@@ -48,7 +48,7 @@ class InfoScreen extends StatelessWidget {
                 '🐟 Fischbestimmung\n'
                 '• 6 Bildtafeln einzeln gezeigt (vorher verdeckt gezogen)\n'
                 '• Bestanden: ≥ 4 von 6 richtig benannt (66%)\n'
-                '• Nur der deutsche Name ist zwingend – Latein ist Bonus\n\n'
+                '• Nur der deutsche Name wird abgefragt\n\n'
                 '🎣 Rutenzusammenstellung\n'
                 '• Max. 28 Punkte, Bestanden: ≥ 25 Punkte\n'
                 '• 3 Fehlerpunkte sind erlaubt, jeder weitere ist fatal\n'
@@ -187,27 +187,127 @@ class InfoScreen extends StatelessWidget {
           SizedBox(height: 12),
           _InfoSection(
             icon: Icons.lightbulb,
-            title: 'Lerntipps (aus Erfahrungsberichten)',
+            title: 'Weitere Tipps:',
             content:
-                '1. Prüfungsanmeldung in NRW steht für jeden offen – kein Kurs nötig.\n\n'
-                '2. Fischkarten früh anfangen: 49 Arten brauchen Zeit. Täglich 5–10 Minuten mit der App reicht.\n\n'
-                '3. Schriftlich: Ein Drittel der Fragen lässt sich per Allgemeinwissen lösen. '
+                '1. Vorbereitungskurs ist nicht Pflicht, aber zu empfehlen.\n\n'
+                '2. Die Prüfung ist in vielen Kreisen nur 1x im Jahr. Meistens muss man sich einen Monat zuvor anmelden,'
+                'Plätze sind aber oft schon vorher weg. Frühzeitig anmelden!\n\n'
+                '3. Fischkarten früh anfangen: 49 Arten brauchen Zeit. Täglich 5–10 Minuten mit der App reicht.\n\n'
+                '4. Schriftlich: Ein Drittel der Fragen lässt sich per Allgemeinwissen lösen. '
                 'Konzentriere dich auf die restlichen zwei Drittel.\n\n'
-                '4. Ruten-Lerntipp: Erst eine Angelart komplett lernen (z.B. alle 9 Komponenten von A5 Hecht), '
+                '5. Ruten-Lerntipp: Erst eine Angelart komplett lernen (z.B. alle 9 Komponenten von A5 Hecht), '
                 'dann vergleichen: "Wo unterscheiden sich A5 Hecht und A6 Barsch?"\n\n'
-                '5. Bester Praxistipp Rute: Geh in einen Angel- oder Sportladen, nimm einen Einkaufskorb '
+                '6. Bester Praxistipp Rute: Geh in einen Angel- oder Sportladen, nimm einen Einkaufskorb '
                 'und stelle dir die Rute aus der Aufgabenstellung tatsächlich zusammen. '
                 'Was du einmal in den Händen gehalten hast, vergisst du nicht.\n\n'
-                '6. Ausschlussprinzip bei MC-Fragen: Zwei offensichtlich falsche Antworten ausschließen, '
+                '7. Ausschlussprinzip bei MC-Fragen: Zwei offensichtlich falsche Antworten ausschließen, '
                 'dann bleibt meist die richtige übrig.\n\n'
-                '7. Schwachste Sachgebiete zuerst stärken – 5/10 in einem Sachgebiet = nicht bestanden, '
+                '8. Schwachste Sachgebiete zuerst stärken – 5/10 in einem Sachgebiet = nicht bestanden, '
                 'egal wie gut du in den anderen bist.',
           ),
 
           const SizedBox(height: 24),
+          _SourcesCard(),
+          const SizedBox(height: 12),
           _AboutCard(),
           const SizedBox(height: 8),
         ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SourcesCard extends StatelessWidget {
+  Future<void> _launch(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Icon(Icons.link, color: cs.primary, size: 20),
+              const SizedBox(width: 8),
+              Text('Offizielle Quellen',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: cs.primary)),
+            ]),
+            const SizedBox(height: 4),
+            Text(
+              'Die Inhalte dieser App basieren auf den offiziellen Unterlagen der zuständigen Behörden und Verbände:',
+              style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
+            ),
+            const SizedBox(height: 12),
+            _SourceLink(
+              label: 'Landesfischereiverband Westfalen und Lippe e.V.',
+              url: 'https://www.lfv-westfalen.de',
+              onTap: _launch,
+            ),
+            _SourceLink(
+              label: 'Rheinischer Fischereiverband von 1880 e.V.',
+              url: 'https://rhfv.de',
+              onTap: _launch,
+            ),
+            _SourceLink(
+              label: 'Ministerium für Umwelt, Naturschutz und Verkehr NRW',
+              url: 'https://www.umwelt.nrw.de',
+              onTap: _launch,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SourceLink extends StatelessWidget {
+  final String label;
+  final String url;
+  final Future<void> Function(String) onTap;
+  const _SourceLink({required this.label, required this.url, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: InkWell(
+        onTap: () => onTap(url),
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.open_in_new,
+                  size: 16,
+                  color: Theme.of(context).colorScheme.primary),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(label,
+                        style: const TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.w500)),
+                    Text(url,
+                        style: TextStyle(
+                            fontSize: 11,
+                            color: Theme.of(context).colorScheme.primary)),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
