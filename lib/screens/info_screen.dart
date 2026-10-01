@@ -221,7 +221,7 @@ class InfoScreen extends StatelessWidget {
 class _SourcesCard extends StatelessWidget {
   Future<void> _launch(String url) async {
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) launchUrl(uri, mode: LaunchMode.externalApplication);
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   @override
@@ -244,10 +244,15 @@ class _SourcesCard extends StatelessWidget {
             ]),
             const SizedBox(height: 4),
             Text(
-              'Die Inhalte dieser App basieren auf den offiziellen Unterlagen der zuständigen Behörden und Verbände:',
+              'Die Prüfungsfragen stammen aus der amtlichen Fischerprüfungsordnung NRW. Diese App ist kein offizielles Angebot einer Behörde. Quellen:',
               style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
             ),
             const SizedBox(height: 12),
+            _SourceLink(
+              label: 'Verordnung über die Fischerprüfung NRW (Fischerprüfungsordnung) mit Prüfungsfragen (Anlage 1) – recht.nrw.de',
+              url: 'https://recht.nrw.de/lrgv/rechtsverordnung/01012015-verordnung-ueber-die-fischerpruefung-fischerpruefungsordnung/',
+              onTap: _launch,
+            ),
             _SourceLink(
               label: 'Landesfischereiverband Westfalen und Lippe e.V.',
               url: 'https://www.lfv-westfalen.de',
@@ -317,7 +322,7 @@ class _SourceLink extends StatelessWidget {
 class _AboutCard extends StatelessWidget {
   Future<void> _launch(String url) async {
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) launchUrl(uri);
+    await launchUrl(uri);
   }
 
   @override
