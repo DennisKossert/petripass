@@ -29,7 +29,7 @@ android {
 
     defaultConfig {
         applicationId = "de.fischereiapp.fisch_pruefung_nrw"
-        minSdk = flutter.minSdkVersion
+        minSdk = 24  // Google Play: automatischer Schutz braucht mind. API 24
         targetSdk = 36  // Google Play: Ziel-API 36 ab 31.08.2026
         versionCode = flutter.versionCode
         versionName = flutter.versionName
